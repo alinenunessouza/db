@@ -7,26 +7,21 @@ CREATE TABLE Produto (id CHAR (16),
                       largura DOUBLE,
                       massa DOUBLE,
                       codigo_barra char (30),
-                      PRIMARY KEY (id, produto_id),
-                      FOREIGN KEY (id_produto) REFERENCES
-                      );
-
-CREATE TABLE Pedido (id CHAR (16),
-                      fabricacao_timestamp DATE,
-                      custo_unitario DOUBLE,
-                      nome char (30),
-                      altura DOUBLE.
-                      comprimento DOUBLE.
-                      largura DOUBLE,
-                      massa DOUBLE,
-                      codigo_barra char (30),
                       PRIMARY KEY (id),
                       FOREIGN KEY (id_produto) REFERENCES
                       );
                       
-CREATE TABLE Comprador (id CHAR (16));
+CREATE TABLE Pedido (id CHAR (16),
+                     timestamp DATE,
+                     PRIMARY KEY (id),
+                     FOREIGN KEY (id_comprador) REFERENCES,
+                     FOREIGN KEY (id_vendedor) REFERENCES);
+
+CREATE TABLE Comprador (id CHAR (16),
+                       cartao char (16));
  
-CREATE TABLE Vendedor (id CHAR (16));
+CREATE TABLE Vendedor (id CHAR (16),
+                      registro);
 
 CREATE TABLE Usuario (cpf CHAR (11),
                       nome char (10),
