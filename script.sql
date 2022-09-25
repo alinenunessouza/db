@@ -1,4 +1,4 @@
-CREATE TABLE Produto (id CHAR (16),
+CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       fabricacao_timestamp DATE,
                       custo_unitario DOUBLE,
                       nome char (30),
@@ -7,20 +7,29 @@ CREATE TABLE Produto (id CHAR (16),
                       largura DOUBLE,
                       massa DOUBLE,
                       codigo_barra char (30),
-                      PRIMARY KEY (id),
-                      FOREIGN KEY (id_produto) REFERENCES
+                      PRIMARY KEY (id)
                       );
+                     
+create table Vendido(id uuid default uuid_generate_v4(),
                       
-CREATE TABLE Pedido (id CHAR (16),
+                      PRIMARY KEY (id)
+                      );               
+ 
+                      
+CREATE TABLE Pedido (id uuid default uuid_generate_v4(),
                      timestamp DATE,
                      PRIMARY KEY (id),
-                     FOREIGN KEY (id_comprador) REFERENCES,
-                     FOREIGN KEY (id_vendedor) REFERENCES);
+                     FOREIGN KEY (id_comprador) references Comprador(id),
+                     FOREIGN KEY (id_vendedor) references Vendedor(id)
+                    );
+                    
+                    
+                   
 
-CREATE TABLE Comprador (id CHAR (16),
+CREATE TABLE Comprador (id uuid default uuid_generate_v4(),
                        cartao char (16));
  
-CREATE TABLE Vendedor (id CHAR (16),
+CREATE TABLE Vendedor (id uuid default uuid_generate_v4(),
                       registro);
 
 CREATE TABLE Usuario (cpf CHAR (11),
@@ -30,7 +39,7 @@ CREATE TABLE Usuario (cpf CHAR (11),
                       telefone char (9),
                       PRIMARY KEY (cpf));
 
-CREATE TABLE Endereco (id CHAR (16),
+CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
                       rua char (30),
                       numero INTEGER,
                       cep char (10),
