@@ -1,5 +1,10 @@
 -- PostgreSQL 9.6
 
+-- Definições:
+-- - vendedores precisam ser pessoas físicas, com CPF
+-- - vendedor e comprador podem ter mais de um endereço
+-- - pode ocorrer um cenário em que o vendedor e o comprador são o mesmo usuário
+
 CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       fabricacao_timestamp DATE,
                       custo_unitario DECIMAL,
@@ -48,8 +53,7 @@ CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
                       complemento char (15),
                       PRIMARY KEY (id));
 
--- criar uma visão para calcular o volume
-
--- vendedores precisam ser pessoas físicas, com CPF
-
--- vendedor e comprador só devem ter um endereço
+-- criação de view para calcular o volume do produto
+CREATE VIEW VolumeProduto (id, nome, volume) AS
+SELECT p.id as id_produto, p.nome as nome, (p.comprimento * p.largura * p.altura) as volume 
+FROM Produto p;
