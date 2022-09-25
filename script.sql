@@ -16,7 +16,7 @@ CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       codigo_barra char (30),
                       PRIMARY KEY (id)
                       );
-                     
+                                           
 CREATE TABLE Vendido (id uuid default uuid_generate_v4(),
                      PRIMARY KEY (id)
                      );      
@@ -31,12 +31,14 @@ CREATE TABLE Vendedor (id uuid default uuid_generate_v4(),
                        registro char (20)
                       );
  
+-- ao excluir um Pedido, todos os itens relacionados a esta venda devem ser excluídos da tabela de vendas
+-- ao mesmo tempo, deve ser possível excluir um item de uma venda 
 CREATE TABLE Pedido (id uuid default uuid_generate_v4(),
                      timestamp DATE,
                      PRIMARY KEY (id),
                      id_comprador uuid REFERENCES Comprador (id),
                      id_vendedor uuid REFERENCES Vendedor (id)
-                    );
+                     ON DELETE CASCADE);
 
 CREATE TABLE Usuario (cpf CHAR (11),
                       nome char (10),
@@ -57,3 +59,12 @@ CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
 CREATE VIEW VolumeProduto (id, nome, volume) AS
 SELECT p.id as id_produto, p.nome as nome, (p.comprimento * p.largura * p.altura) as volume 
 FROM Produto p;
+
+-- criação de uma visão para apresentar as vendas de um vendedor em um determinado mês, a quantidade de itens vendidos e o valor total das suas vendas
+
+-- criação de visão para apresentar todos os dados de uma venda específica, o valor total desta venda, o nome do comprador e do vendedor
+
+-- criação de visão para apresentar o estoque disponível, listando a quantidade de cada item
+-- TODO verificar se é necessário colocar uma info de total de itens na tabela Produto
+
+-- testes para validar o atendimento dos requisitos apresentados:
