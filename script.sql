@@ -19,17 +19,22 @@ CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       );
                                            
 CREATE TABLE Vendido (id uuid default uuid_generate_v4(),
+					 quantidade INTEGER,
                      PRIMARY KEY (id)
                      );      
                      
 CREATE TABLE Comprador (id uuid default uuid_generate_v4(),
                         cartao char (16),
+                        cpf_usuario char (11),
+                        FOREIGN KEY (cpf_usuario) references Usuario(cpf),
                         PRIMARY KEY (id)
                         );
  
 CREATE TABLE Vendedor (id uuid default uuid_generate_v4(),
+                       registro char (20),
+                       cpf_usuario char (11),
                        PRIMARY KEY (id),
-                       registro char (20)
+	                   FOREIGN KEY (cpf_usuario) references Usuario(cpf)
                       );
  
 -- ao excluir um Pedido, todos os itens relacionados a esta venda devem ser excluídos da tabela de vendas
