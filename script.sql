@@ -19,14 +19,16 @@ CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       );
                                            
 CREATE TABLE Vendido (id uuid default uuid_generate_v4(),
-					 quantidade INTEGER,
+                     quantidade INTEGER,
+                     id_pedido uuid references Pedido(id),
+                     id_produto uuid references Produto(id),
                      PRIMARY KEY (id)
                      );    
                     
 CREATE TABLE Usuario (cpf CHAR (11),
-                      nome char (50),
-                      sobrenome char (50),
-                      email char (50),
+                      nome char (10),
+                      sobrenome char (30),
+                      email char (30),
                       telefone char (9),
                       PRIMARY KEY (cpf));
                      
@@ -54,10 +56,10 @@ CREATE TABLE Pedido (id uuid default uuid_generate_v4(),
                      );
 
 CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
-                      rua char (50),
+                      rua char (30),
                       numero INTEGER,
                       cep char (10),
-                      bairro char (50),
+                      bairro char (15),
                       complemento char (15),
                       PRIMARY KEY (id));
 
