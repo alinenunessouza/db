@@ -19,10 +19,12 @@ CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       );
                                            
 CREATE TABLE Vendido (id uuid default uuid_generate_v4(),
-					 quantidade INTEGER,
-					 id_pedido uuid references Pedido(id),
-					 id_produto uuid references Produto(id),
-                     PRIMARY KEY (id)
+                      quantidade INTEGER,
+                      id_pedido uuid,
+                      id_produto uuid,
+                      foreign key (id_pedido) references Pedido(id),
+                      foreign key (id_produto) references Produto(id),
+                      PRIMARY KEY (id)
                      );    
                     
 CREATE TABLE Usuario (cpf CHAR (11),
@@ -50,9 +52,11 @@ CREATE TABLE Vendedor (id uuid default uuid_generate_v4(),
 -- ao mesmo tempo, deve ser possível excluir um item de uma venda 
 CREATE TABLE Pedido (id uuid default uuid_generate_v4(),
                      timestamp DATE,
+                     id_comprador uuid,
+                     id_vendedor uuid,
                      PRIMARY KEY (id),
-                     id_comprador uuid REFERENCES Comprador (id),
-                     id_vendedor uuid REFERENCES Vendedor (id)
+                     foreign key (id_comprador) REFERENCES Comprador (id),
+                     foreign key (id_vendedor) REFERENCES Vendedor (id)
                      );
 
 CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
@@ -69,7 +73,7 @@ CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
                       primary key (cpf_usuario, id_endereco),
                       foreign key (cpf_usuario) references Usuario(cpf),
                       foreign key (id_endereco) references Endereco(id)
-					            );
+                      );
 
 -- criação de view para calcular o volume do produto
 CREATE VIEW VolumeProduto (id, nome, volume) AS
