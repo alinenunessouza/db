@@ -16,6 +16,7 @@ CREATE TABLE Produto (
   estoque INTEGER,
   PRIMARY KEY (id)
 );
+
 CREATE TABLE Vendido (
   id uuid default uuid_generate_v4(),
   quantidade INTEGER,
@@ -25,6 +26,7 @@ CREATE TABLE Vendido (
   foreign key (id_produto) references Produto(id),
   PRIMARY KEY (id)
 );
+
 CREATE TABLE Usuario (
   cpf CHAR (11),
   nome char (10),
@@ -33,6 +35,7 @@ CREATE TABLE Usuario (
   telefone char (9),
   PRIMARY KEY (cpf)
 );
+
 CREATE TABLE Comprador (
   id uuid default uuid_generate_v4(),
   cartao char (16),
@@ -40,6 +43,7 @@ CREATE TABLE Comprador (
   FOREIGN KEY (cpf_usuario) references Usuario(cpf),
   PRIMARY KEY (id)
 );
+
 CREATE TABLE Vendedor (
   id uuid default uuid_generate_v4(),
   registro char (20),
@@ -47,6 +51,7 @@ CREATE TABLE Vendedor (
   PRIMARY KEY (id),
   FOREIGN KEY (cpf_usuario) references Usuario(cpf)
 );
+
 -- ao excluir um Pedido, todos os itens relacionados a esta venda devem ser excluídos da tabela de vendas
 -- ao mesmo tempo, deve ser possível excluir um item de uma venda 
 CREATE TABLE Pedido (
@@ -58,6 +63,7 @@ CREATE TABLE Pedido (
   foreign key (id_comprador) REFERENCES Comprador (id),
   foreign key (id_vendedor) REFERENCES Vendedor (id)
 );
+
 CREATE TABLE Endereco (
   id uuid default uuid_generate_v4(),
   rua char (30),
@@ -67,6 +73,7 @@ CREATE TABLE Endereco (
   complemento char (15),
   PRIMARY KEY (id)
 );
+
 create table Mora_em (
   cpf_usuario char (11),
   id_endereco uuid,
@@ -74,12 +81,16 @@ create table Mora_em (
   foreign key (cpf_usuario) references Usuario(cpf),
   foreign key (id_endereco) references Endereco(id)
 );
+
 -- criação de view para calcular o volume do produto
 CREATE VIEW VolumeProduto (id, nome, volume) AS
 SELECT p.id as id_produto,
   p.nome as nome,
   (p.comprimento * p.largura * p.altura) as volume
 FROM Produto p;
+
+
+
 -- criação de uma visão para apresentar as vendas de um vendedor em um determinado mês, a quantidade de itens vendidos e o valor total das suas vendas
 -- criação de visão para apresentar todos os dados de uma venda específica, o valor total desta venda, o nome do comprador e do vendedor
 -- criação de visão para apresentar o estoque disponível, listando a quantidade de cada item
@@ -94,6 +105,10 @@ FROM Produto p
     GROUP BY age
   ) C ON p.id = pe.id;
 -- COUNT das ocorrencias na tabela de pedidos
+
+
+
+
 -- testes para validar o atendimento dos requisitos apresentados:
 -- criando usuários
 INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone)
@@ -136,6 +151,8 @@ VALUES (
     'chuckjones@gmail.com',
     '995458256'
   );
+
+
 -- criando produtos
 INSERT INTO Produto (
     fabricacao_timestamp,
@@ -203,6 +220,9 @@ VALUES (
     8980907523,
     40
   );
+
+
+  
 -- criando endereços
 INSERT INTO Endereco (rua, numero, cep, bairro, complemento)
 VALUES (
