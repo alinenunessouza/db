@@ -21,7 +21,14 @@ CREATE TABLE Produto (id uuid default uuid_generate_v4(),
 CREATE TABLE Vendido (id uuid default uuid_generate_v4(),
 					 quantidade INTEGER,
                      PRIMARY KEY (id)
-                     );      
+                     );    
+                    
+CREATE TABLE Usuario (cpf CHAR (11),
+                      nome char (10),
+                      sobrenome char (30),
+                      email char (30),
+                      telefone char (9),
+                      PRIMARY KEY (cpf));
                      
 CREATE TABLE Comprador (id uuid default uuid_generate_v4(),
                         cartao char (16),
@@ -44,14 +51,7 @@ CREATE TABLE Pedido (id uuid default uuid_generate_v4(),
                      PRIMARY KEY (id),
                      id_comprador uuid REFERENCES Comprador (id),
                      id_vendedor uuid REFERENCES Vendedor (id)
-                     ON DELETE CASCADE);
-
-CREATE TABLE Usuario (cpf CHAR (11),
-                      nome char (10),
-                      sobrenome char (30),
-                      email char (30),
-                      telefone char (9),
-                      PRIMARY KEY (cpf));
+                     );
 
 CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
                       rua char (30),
