@@ -14,6 +14,7 @@ CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       largura DECIMAL,
                       massa DECIMAL,
                       codigo_barra char (30),
+                      estoque INTEGER,
                       PRIMARY KEY (id)
                       );
                                            
@@ -65,7 +66,13 @@ FROM Produto p;
 -- criação de visão para apresentar todos os dados de uma venda específica, o valor total desta venda, o nome do comprador e do vendedor
 
 -- criação de visão para apresentar o estoque disponível, listando a quantidade de cada item
--- TODO verificar se é necessário colocar uma info de total de itens na tabela Produto
+CREATE VIEW EstoqueAtual (id, quantidade) AS
+SELECT p.id, pe.cnt
+  FROM Produto p
+       INNER JOIN (SELECT x, count(x) as cnt
+                     FROM Pedido 
+                    GROUP BY age) C ON p.id = pe.id;
+-- COUNT das ocorrencias na tabela de pedidos
 
 -- testes para validar o atendimento dos requisitos apresentados:
 
@@ -77,9 +84,9 @@ INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('79233761665
 INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('73381889450', 'Papa', 'Leguas', 'chuckjones@gmail.com', '995458256');
 
 -- criando produtos
-INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2022-02-09 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), 49.90, 'CAMISETA EM MEIA MALHA COM ESTAMPA DO PAPA LÉGUAS', 34, 94, 20, 0.1, 606063065);
-INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2021-03-25 08:40:10', 'YYYY-MM-DD HH24:MI:SS'), 51.90, 'Mini Estátua Colecionável Papa-Léguas Road Runner', 8, 6, 4, 0.3, 90901872);
-INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2022-06-25 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), 4149.00, 'Geladeira Panasonic Frost Free 483L A+++', 155, 65, 60, 73, 8980907523);
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra, estoque) VALUES (TO_TIMESTAMP('2022-02-09 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), 49.90, 'CAMISETA EM MEIA MALHA COM ESTAMPA DO PAPA LÉGUAS', 34, 94, 20, 0.1, 606063065, 10);
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra, estoque) VALUES (TO_TIMESTAMP('2021-03-25 08:40:10', 'YYYY-MM-DD HH24:MI:SS'), 51.90, 'Mini Estátua Colecionável Papa-Léguas Road Runner', 8, 6, 4, 0.3, 90901872, 5);
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra, estoque) VALUES (TO_TIMESTAMP('2022-06-25 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), 4149.00, 'Geladeira Panasonic Frost Free 483L A+++', 155, 65, 60, 73, 8980907523, 40);
 
 -- criando endereços
 INSERT INTO Endereco (rua, numero, cep, bairro, complemento) VALUES ('Av. Unisinos', 950, 93022750, 'Cristo Rei', 'Universidade');
