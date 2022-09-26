@@ -8,7 +8,7 @@
 CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       fabricacao_timestamp DATE,
                       custo_unitario DECIMAL,
-                      nome char (30),
+                      nome char (50),
                       altura DECIMAL,
                       comprimento DECIMAL,
                       largura DECIMAL,
@@ -77,6 +77,12 @@ INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('79233761665
 INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('73381889450', 'Papa', 'Leguas', 'chuckjones@gmail.com', '995458256');
 
 -- criando produtos
-INSERT INTO Produto (fabricacao_timestamp, custo_unitario, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2022-02-09 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), 49.90, 'CAMISETA EM MEIA MALHA COM ESTAMPA DO PAPA LÉGUAS BRANCO', 34, 94, 20, 0.1, 606063065);
-INSERT INTO Produto (fabricacao_timestamp, custo_unitario, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2021-03-25 08:40:10', 'YYYY-MM-DD HH24:MI:SS'), 51.90, 'Mini Estátua Colecionável Papa-Léguas Road Runner', 8, 6, 4, 0.3, 90901872);
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2022-02-09 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), 49.90, 'CAMISETA EM MEIA MALHA COM ESTAMPA DO PAPA LÉGUAS', 34, 94, 20, 0.1, 606063065);
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2021-03-25 08:40:10', 'YYYY-MM-DD HH24:MI:SS'), 51.90, 'Mini Estátua Colecionável Papa-Léguas Road Runner', 8, 6, 4, 0.3, 90901872);
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, nome, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2022-06-25 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), 4149.00, 'Geladeira Panasonic Frost Free 483L A+++', 155, 65, 60, 73, 8980907523);
 
+-- criando endereços
+INSERT INTO Endereco (rua, numero, cep, bairro, complemento) VALUES ('Av. Unisinos', 950, 93022750, 'Cristo Rei', 'Universidade');
+INSERT INTO Endereco (rua, numero, cep, bairro, complemento) VALUES ('Av. Dr. Nilo Peçanha', 1600, 91330002, 'Boa Vista', 'Campus POA');
+INSERT INTO Endereco (rua, numero, cep, bairro, complemento) VALUES ('R. Vinte e Quatro de Maio', 741, 93315125, 'Vila Rosa', 'Padaria');
+INSERT INTO Endereco (rua, numero, cep, bairro, complemento) VALUES ('R. Guia Lopes', 4638, 93410324, 'Boa Vista', 'Loja 1');
