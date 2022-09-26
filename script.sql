@@ -19,9 +19,9 @@ CREATE TABLE Produto (id uuid default uuid_generate_v4(),
                       );
                                            
 CREATE TABLE Vendido (id uuid default uuid_generate_v4(),
-                     quantidade INTEGER,
-                     id_pedido uuid references Pedido(id),
-                     id_produto uuid references Produto(id),
+					 quantidade INTEGER,
+					 id_pedido uuid references Pedido(id),
+					 id_produto uuid references Produto(id),
                      PRIMARY KEY (id)
                      );    
                     
@@ -62,6 +62,14 @@ CREATE TABLE Endereco (id uuid default uuid_generate_v4(),
                       bairro char (15),
                       complemento char (15),
                       PRIMARY KEY (id));
+                     
+ create table Mora_em (
+                      cpf_usuario char (11),
+                      id_endereco uuid,
+                      primary key (cpf_usuario, id_endereco),
+                      foreign key (cpf_usuario) references Usuario(cpf),
+                      foreign key (id_endereco) references Endereco(id)
+					            );
 
 -- criação de view para calcular o volume do produto
 CREATE VIEW VolumeProduto (id, nome, volume) AS
