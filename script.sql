@@ -17,16 +17,6 @@ CREATE TABLE Produto (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE Vendido (
-  id uuid default uuid_generate_v4(),
-  quantidade INTEGER,
-  id_pedido uuid,
-  id_produto uuid,
-  foreign key (id_pedido) references Pedido(id),
-  foreign key (id_produto) references Produto(id),
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE Usuario (
   cpf CHAR (11),
   nome char (10),
@@ -63,6 +53,17 @@ CREATE TABLE Pedido (
   foreign key (id_comprador) REFERENCES Comprador (id),
   foreign key (id_vendedor) REFERENCES Vendedor (id)
 );
+
+CREATE TABLE Vendido (
+  id uuid default uuid_generate_v4(),
+  quantidade INTEGER,
+  id_pedido uuid,
+  id_produto uuid,
+  foreign key (id_pedido) references Pedido(id),
+  foreign key (id_produto) references Produto(id),
+  PRIMARY KEY (id)
+);
+
 
 CREATE TABLE Endereco (
   id uuid default uuid_generate_v4(),
