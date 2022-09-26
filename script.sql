@@ -68,3 +68,15 @@ FROM Produto p;
 -- TODO verificar se é necessário colocar uma info de total de itens na tabela Produto
 
 -- testes para validar o atendimento dos requisitos apresentados:
+
+-- criando usuários
+INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('72381889450', 'Chuck', 'Jones', 'chuckjones@gmail.com', '995458256');
+INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('14748783184', 'Michael', 'Maltese', 'michaelmaltese@gmail.com', '997473721');
+INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('22554696772', 'Geococcyx', 'Californianus', 'corredor@gmail.com', '997471220');
+INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('79233761665', 'Canis', 'Latrans', 'azarado123@hotmail.com', '998123868');
+INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone) VALUES ('73381889450', 'Papa', 'Leguas', 'chuckjones@gmail.com', '995458256');
+
+-- criando produtos
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2022-02-09 07:00:00', 'YYYY-MM-DD HH24:MI:SS'), 49.90, 'CAMISETA EM MEIA MALHA COM ESTAMPA DO PAPA LÉGUAS BRANCO', 34, 94, 20, 0.1, 606063065);
+INSERT INTO Produto (fabricacao_timestamp, custo_unitario, altura, comprimento, largura, massa, codigo_barra) VALUES (TO_TIMESTAMP('2021-03-25 08:40:10', 'YYYY-MM-DD HH24:MI:SS'), 51.90, 'Mini Estátua Colecionável Papa-Léguas Road Runner', 8, 6, 4, 0.3, 90901872);
+
