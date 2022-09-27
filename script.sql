@@ -144,6 +144,9 @@ VALUES (
     'chuckjones@gmail.com',
     '995458256'
   );
+  
+INSERT INTO Usuario (cpf, nome, sobrenome, email, telefone)
+VALUES ('05965350074', 'Kenzo', 'Takada', 'kenzo@gmail.com', '995848256');
 
 
 -- criando produtos
@@ -253,13 +256,16 @@ VALUES (
   -- inserindo compradores
 
 INSERT INTO Compradores (cartao, cpf_usuario)
-VALUES ('5451360035960609', '14748783184') );
+VALUES ('5451360035960609', '14748783184');
 
 
 INSERT INTO Compradores (cartao, cpf_usuario)
-VALUES ('5401815376801937', '72381889450') );
+VALUES ('5401815376801937', '72381889450');
 
 -- inserindo vendedores
 
 INSERT INTO Vendedores (registro, cpf_usuario)
-VALUES ('5451360035960609', '22554696772') );
+VALUES ('5451360035960609', '22554696772');
+
+INSERT INTO Vendedores (registro, cpf_usuario)
+VALUES ('05965350074', '11554696772');
