@@ -102,11 +102,16 @@ SELECT * FROM vendasporvendedor;
 
 -- criação de visão para apresentar todos os dados de uma venda específica, o valor total desta venda, o nome do comprador e do vendedor
 CREATE VIEW DadosPedido (id, timestamp, id_comprador, id_vendedor, total, nome_comprador, nome_vendedor) AS
-SELECT p.*, vendidos, p.id_vendedor, p.id_comprador
+SELECT p.*, vendidos * prod.custo_unitario, usr_c.nome, usr_v.nome
 FROM Pedido p
 INNER JOIN (
   SELECT id_produto, SUM(quantidade) AS vendidos
   FROM Vendido GROUP BY id_produto) v ON p.id = v.id_produto
+JOIN Vendedor on p.id_vendedor = vendedor.id
+JOIN Comprador c on p.id_comprador = c.id
+JOIN Produto prod on v.id_produto = prod.id
+JOIN Usuario usr_v on Vendedor.cpf_usuario = usr_v.cpf
+JOIN Usuario usr_c on Comprador.cpf_usuario = usr_c.cpf
   WHERE p.id = 'e80819a4-3e10-11ed-b878-0242ac120002'; 
 
 -- criação de visão para apresentar o estoque disponível, listando a quantidade de cada item
