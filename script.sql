@@ -101,22 +101,15 @@ GROUP BY v.id, EXTRACT(MONTH FROM p."timestamp");
 SELECT * FROM vendasporvendedor;
 
 -- criação de visão para apresentar todos os dados de uma venda específica, o valor total desta venda, o nome do comprador e do vendedor
-CREATE VIEW DadosPedido (id, timestamp, id_comprador, id_vendedor, total, nome_comprador, nome_vendedor) AS
-SELECT p.*,
-       vendidos * prod.custo_unitario,
-       usr_c.nome,
-       usr_v.nome
-FROM Pedido p
-INNER JOIN
-  (SELECT id_produto,
-          SUM(quantidade) AS vendidos
-   FROM Vendido
-   GROUP BY id_produto) v ON p.id = v.id_produto
-JOIN Vendedor ON p.id_vendedor = vendedor.id
-JOIN Comprador c ON p.id_comprador = c.id
-JOIN Produto prod ON v.id_produto = prod.id
-JOIN Usuario usr_v ON Vendedor.cpf_usuario = usr_v.cpf
-JOIN Usuario usr_c ON Comprador.cpf_usuario = usr_c.cpf;
+create view DadosPedido (id, timestamp, id_comprador, id_vendedor, total, nome_comprador, nome_vendedor)AS
+SELECT p.id, p."timestamp", c.id, v.id, (vend.quantidade * prod.custo_unitario) as valor_total, usr_comprador.nome, usr_vendedor.nome 
+from pedido p
+join vendido vend on vend.id_pedido = p.id 
+join produto prod on vend.id_produto = prod.id
+join comprador c on c.id = p.id_comprador 
+join vendedor v on v.id = p.id_vendedor 
+join usuario usr_comprador on usr_comprador.cpf = c.cpf_usuario 
+join usuario usr_vendedor on usr_vendedor.cpf = v.cpf_usuario;
 
 SELECT *
 FROM DadosPedido
