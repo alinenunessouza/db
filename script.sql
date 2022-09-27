@@ -249,3 +249,17 @@ VALUES (
     'Boa Vista',
     'Loja 1'
   );
+  
+  -- inserindo compradores
+
+INSERT INTO Compradores (cartao, cpf_usuario)
+VALUES ('5451360035960609', '14748783184') );
+
+
+INSERT INTO Compradores (cartao, cpf_usuario)
+VALUES ('5401815376801937', '72381889450') );
+
+-- inserindo vendedores
+
+INSERT INTO Vendedores (registro, cpf_usuario)
+VALUES ('5451360035960609', '22554696772') );
