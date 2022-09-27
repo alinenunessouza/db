@@ -269,3 +269,11 @@ VALUES ('5451360035960609', '22554696772');
 
 INSERT INTO Vendedor (registro, cpf_usuario)
 VALUES ('909020002', '05965350074');
+
+-- inserindo pedidos
+INSERT INTO Pedido (timestamp, id_comprador, id_vendedor)
+VALUES (TO_TIMESTAMP('2022-08-25 11:35:04', 'YYYY-MM-DD HH24:MI:SS'), , );
+
+-- inserindo pedidos vendidos
+INSERT INTO Vendido (quantidade, id_pedido, id_produto)
+VALUES (2, , );
