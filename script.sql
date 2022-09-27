@@ -96,18 +96,11 @@ FROM Produto p;
 -- criação de visão para apresentar o estoque disponível, listando a quantidade de cada item
 CREATE VIEW EstoqueAtual (id, quantidade) AS
 SELECT p.id,
-  pe.cnt
+  (p.estoque - v.vendidos) as estoque
 FROM Produto p
-  INNER JOIN (
-    SELECT x,
-      count(x) as cnt
-    FROM Pedido
-    GROUP BY age
-  ) C ON p.id = pe.id;
--- COUNT das ocorrencias na tabela de pedidos
-
-
-
+INNER JOIN (
+  SELECT id_produto, SUM(quantidade) AS vendidos
+  FROM Vendido GROUP BY id_produto) v ON p.id = v.id_produto;
 
 -- testes para validar o atendimento dos requisitos apresentados:
 -- criando usuários
