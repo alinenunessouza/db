@@ -90,7 +90,17 @@ SELECT p.id as id_produto,
 FROM Produto p;
 
 -- criação de uma visão para apresentar as vendas de um vendedor em um determinado mês, a quantidade de itens vendidos e o valor total das suas vendas
+-- INSERIR
+
 -- criação de visão para apresentar todos os dados de uma venda específica, o valor total desta venda, o nome do comprador e do vendedor
+CREATE VIEW DadosPedido (total, nome_comprador, nome_vendedor) AS
+SELECT p.id
+FROM Pedido p
+INNER JOIN (
+  SELECT id_produto, SUM(quantidade) AS vendidos
+  FROM Vendido GROUP BY id_produto) v ON p.id = v.id_produto
+  WHERE p.id = 'e80819a4-3e10-11ed-b878-0242ac120002'; 
+
 -- criação de visão para apresentar o estoque disponível, listando a quantidade de cada item
 CREATE VIEW EstoqueAtual (id, quantidade) AS
 SELECT p.id,
@@ -101,8 +111,8 @@ INNER JOIN (
   FROM Vendido GROUP BY id_produto) v ON p.id = v.id_produto;
  
  
-create VIEW VendasPorVendedor (id, quantidade, total, mes_do_pedido) AS
-SELECT v.id, count(*), sum(vend.quantidade * prod.custo_unitario), EXTRACT(MONTH FROM p."timestamp")
+create VIEW VendasPorVendedor (id, quantidade, total) AS
+SELECT v.id, count(*), sum(vend.quantidade * prod.custo_unitario), EXTRACT(MONTH FROM p."timestamp") as mes_do_pedido
 from pedido p
 join vendedor v on p.id_vendedor = v.id
 join vendido vend on vend.id_pedido = p.id
