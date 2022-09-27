@@ -89,8 +89,6 @@ SELECT p.id as id_produto,
   (p.comprimento * p.largura * p.altura) as volume
 FROM Produto p;
 
-
-
 -- criação de uma visão para apresentar as vendas de um vendedor em um determinado mês, a quantidade de itens vendidos e o valor total das suas vendas
 -- criação de visão para apresentar todos os dados de uma venda específica, o valor total desta venda, o nome do comprador e do vendedor
 -- criação de visão para apresentar o estoque disponível, listando a quantidade de cada item
@@ -151,6 +149,7 @@ VALUES ('05965350074', 'Kenzo', 'Takada', 'kenzo@gmail.com', '995848256');
 
 -- criando produtos
 INSERT INTO Produto (
+    id,
     fabricacao_timestamp,
     custo_unitario,
     nome,
@@ -162,6 +161,7 @@ INSERT INTO Produto (
     estoque
   )
 VALUES (
+    '4b66c5c8-3e10-11ed-b878-0242ac120002',
     TO_TIMESTAMP('2022-02-09 07:00:00', 'YYYY-MM-DD HH24:MI:SS'),
     49.90,
     'CAMISETA EM MEIA MALHA COM ESTAMPA DO PAPA LÉGUAS',
@@ -173,6 +173,7 @@ VALUES (
     10
   );
 INSERT INTO Produto (
+    id,
     fabricacao_timestamp,
     custo_unitario,
     nome,
@@ -184,6 +185,7 @@ INSERT INTO Produto (
     estoque
   )
 VALUES (
+    '8df94ece-3e10-11ed-b878-0242ac120002',
     TO_TIMESTAMP('2021-03-25 08:40:10', 'YYYY-MM-DD HH24:MI:SS'),
     51.90,
     'Mini Estátua Colecionável Papa-Léguas Road Runner',
@@ -195,6 +197,7 @@ VALUES (
     5
   );
 INSERT INTO Produto (
+    id,
     fabricacao_timestamp,
     custo_unitario,
     nome,
@@ -206,6 +209,7 @@ INSERT INTO Produto (
     estoque
   )
 VALUES (
+    '9c0fa044-3e10-11ed-b878-0242ac120002',
     TO_TIMESTAMP('2022-06-25 10:00:00', 'YYYY-MM-DD HH24:MI:SS'),
     4149.00,
     'Geladeira Panasonic Frost Free 483L A+++',
@@ -220,16 +224,18 @@ VALUES (
 
   
 -- criando endereços
-INSERT INTO Endereco (rua, numero, cep, bairro, complemento)
+INSERT INTO Endereco (id, rua, numero, cep, bairro, complemento)
 VALUES (
+    'a75b8544-3e10-11ed-b878-0242ac120002',
     'Av. Unisinos',
     950,
     93022750,
     'Cristo Rei',
     'Universidade'
   );
-INSERT INTO Endereco (rua, numero, cep, bairro, complemento)
+INSERT INTO Endereco (id, rua, numero, cep, bairro, complemento)
 VALUES (
+    'b25eba56-3e10-11ed-b878-0242ac120002',
     'Av. Dr. Nilo Peçanha',
     1600,
     91330002,
@@ -244,8 +250,9 @@ VALUES (
     'Vila Rosa',
     'Padaria'
   );
-INSERT INTO Endereco (rua, numero, cep, bairro, complemento)
+INSERT INTO Endereco (id, rua, numero, cep, bairro, complemento)
 VALUES (
+    'be5842aa-3e10-11ed-b878-0242ac120002',
     'R. Guia Lopes',
     4638,
     93410324,
@@ -255,25 +262,25 @@ VALUES (
   
 -- inserindo compradores
 
-INSERT INTO Comprador (cartao, cpf_usuario)
-VALUES ('5451360035960609', '14748783184');
+INSERT INTO Comprador (id, cartao, cpf_usuario)
+VALUES ('fbdf8c00-3e10-11ed-b878-0242ac120002', '5451360035960609', '14748783184');
 
 
-INSERT INTO Comprador (cartao, cpf_usuario)
-VALUES ('5401815376801937', '72381889450');
+INSERT INTO Comprador (id, cartao, cpf_usuario)
+VALUES ('f6c48b12-3e10-11ed-b878-0242ac120002', '5401815376801937', '72381889450');
 
 -- inserindo vendedores
 
-INSERT INTO Vendedor (registro, cpf_usuario)
-VALUES ('5451360035960609', '22554696772');
+INSERT INTO Vendedor (id, registro, cpf_usuario)
+VALUES ('f23949ac-3e10-11ed-b878-0242ac120002', '5451360035960609', '22554696772');
 
-INSERT INTO Vendedor (registro, cpf_usuario)
-VALUES ('909020002', '05965350074');
+INSERT INTO Vendedor (id, registro, cpf_usuario)
+VALUES ('edcecad6-3e10-11ed-b878-0242ac120002', '909020002', '05965350074');
 
 -- inserindo pedidos
-INSERT INTO Pedido (timestamp, id_comprador, id_vendedor)
-VALUES (TO_TIMESTAMP('2022-08-25 11:35:04', 'YYYY-MM-DD HH24:MI:SS'), , );
+INSERT INTO Pedido (id, timestamp, id_comprador, id_vendedor)
+VALUES ('e80819a4-3e10-11ed-b878-0242ac120002', TO_TIMESTAMP('2022-08-25 11:35:04', 'YYYY-MM-DD HH24:MI:SS'), 'f6c48b12-3e10-11ed-b878-0242ac120002', 'f23949ac-3e10-11ed-b878-0242ac120002');
 
 -- inserindo pedidos vendidos
 INSERT INTO Vendido (quantidade, id_pedido, id_produto)
-VALUES (2, , );
+VALUES (2, 'e80819a4-3e10-11ed-b878-0242ac120002', '4b66c5c8-3e10-11ed-b878-0242ac120002');
