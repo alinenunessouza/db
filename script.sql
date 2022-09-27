@@ -253,19 +253,19 @@ VALUES (
     'Loja 1'
   );
   
-  -- inserindo compradores
+-- inserindo compradores
 
-INSERT INTO Compradores (cartao, cpf_usuario)
+INSERT INTO Comprador (cartao, cpf_usuario)
 VALUES ('5451360035960609', '14748783184');
 
 
-INSERT INTO Compradores (cartao, cpf_usuario)
+INSERT INTO Comprador (cartao, cpf_usuario)
 VALUES ('5401815376801937', '72381889450');
 
 -- inserindo vendedores
 
-INSERT INTO Vendedores (registro, cpf_usuario)
+INSERT INTO Vendedor (registro, cpf_usuario)
 VALUES ('5451360035960609', '22554696772');
 
-INSERT INTO Vendedores (registro, cpf_usuario)
-VALUES ('05965350074', '11554696772');
+INSERT INTO Vendedor (registro, cpf_usuario)
+VALUES ('909020002', '05965350074');
