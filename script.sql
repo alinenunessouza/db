@@ -55,13 +55,12 @@ CREATE TABLE Pedido (
 );
 
 CREATE TABLE Vendido (
-  id uuid default uuid_generate_v4(),
   quantidade INTEGER,
   id_pedido uuid,
   id_produto uuid,
   foreign key (id_pedido) references Pedido(id),
   foreign key (id_produto) references Produto(id),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id_pedido, id_produto)
 );
 
 
