@@ -101,8 +101,8 @@ INNER JOIN (
   FROM Vendido GROUP BY id_produto) v ON p.id = v.id_produto;
  
  
-create VIEW VendasPorVendedor (id, quantidade, total) AS
-SELECT v.id, count(*), sum(vend.quantidade * prod.custo_unitario), EXTRACT(MONTH FROM p."timestamp") as mes_do_pedido
+create VIEW VendasPorVendedor (id, quantidade, total, mes_do_pedido) AS
+SELECT v.id, count(*), sum(vend.quantidade * prod.custo_unitario), EXTRACT(MONTH FROM p."timestamp")
 from pedido p
 join vendedor v on p.id_vendedor = v.id
 join vendido vend on vend.id_pedido = p.id
