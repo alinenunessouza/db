@@ -1,0 +1,19 @@
+tabelas produtos
+
+tabela consumidor, cliente
+
+pedidos vai ter a chave das duas coisas
+
+usar o trabalho do grau a e adicionar os triggers
+
+1 tabela de pedidos
+só pedidos realmente ativos
+se são entregues ou cancelados, vão para as outras tabelas
+
+
+1 tabela de pedidos_entregues, para ter menos consultas para verificar quais pedidos foram entregues
+
+pedidos cancelados tbm vão para outra tabela, pedidos_cancelados
+
+não precisa ser um relatorio completo, só precisa mostrar prints
+tipo colocar a foto e dizer com esses pedidos foi testado x coisa e resultou em y
