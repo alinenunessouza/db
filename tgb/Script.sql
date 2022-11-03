@@ -12,7 +12,9 @@
 -- - vendedor e comprador podem ter mais de um endereço
 -- - pode ocorrer um cenário em que o vendedor e o comprador são o mesmo usuário
 
-create extension "uuid-ossp"
+DROP TABLE IF EXISTS comprador CASCADE;
+
+create extension "uuid-ossp";
 
 
 CREATE TABLE Produto (
@@ -177,21 +179,24 @@ INNER JOIN (
  
  -- criação de trigger
 CREATE OR REPLACE FUNCTION move_pedido()
-RETURNS TRIGGER LANGUAGE plpgsql as
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
 BEGIN
-		if (new.status=='Entregue') then
-			INSERT INTO pedidos_entregues(id, timestampm, id_comprador, id_vendedor)
-			VALUES (new.id, new.timestampm, new.id_comprador, new.id_vendedor);
-		if (new.status=='Cancelado') then
-			INSERT INTO pedidos_cancelados(id, timestampm, id_comprador, id_vendedor)
-			VALUES (new.id, new.timestampm, new.id_comprador, new.id_vendedor);
-		end if;
-		return new;
-END;
+			if (new.status='Entregue') then
+				INSERT INTO pedidos_entregues(id, timestamp, id_comprador, id_vendedor)
+				VALUES (new.id, new.timestamp, new.id_comprador, new.id_vendedor);
+			elsif (new.status='Cancelado') then
+				INSERT INTO pedidos_cancelados(id, timestamp, id_comprador, id_vendedor)
+				VALUES (new.id, new.timestamp, new.id_comprador, new.id_vendedor);
+			end if;
+			return new;
+	end;
+$$
 
 
-
-DROP trigger  IF EXISTS MonitoraPedido ON Pedido;
+DROP trigger IF EXISTS MonitoraPedido ON Pedido;
 
 CREATE TRIGGER MonitoraPedido 
 AFTER UPDATE OF status ON Pedido
