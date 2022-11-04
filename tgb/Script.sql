@@ -78,6 +78,24 @@ CREATE TABLE Vendido (
   PRIMARY KEY (id_pedido, id_produto)
 );
 
+CREATE TABLE Vendido_Entregue (
+  quantidade INTEGER,
+  id_pedido uuid,
+  id_produto uuid,
+  foreign key (id_pedido) references Pedidos_Entregues(id),
+  foreign key (id_produto) references Produto(id),
+  PRIMARY KEY (id_pedido, id_produto)
+);
+
+CREATE TABLE Vendido_Cancelado (
+  quantidade INTEGER,
+  id_pedido uuid,
+  id_produto uuid,
+  foreign key (id_pedido) references Pedidos_Cancelados(id),
+  foreign key (id_produto) references Produto(id),
+  PRIMARY KEY (id_pedido, id_produto)
+);
+
 
 CREATE TABLE Endereco (
   id uuid default uuid_generate_v4(),
@@ -105,11 +123,6 @@ CREATE TABLE Pedidos_Cancelados (
   PRIMARY KEY (id),
   foreign key (id_comprador) REFERENCES Comprador (id),
   foreign key (id_vendedor) REFERENCES Vendedor (id)
-  
-  --id uuid default uuid_generate_v4(),
-  --id_pedido uuid,
-  --foreign key (id_pedido) references Pedido(id),
-  --PRIMARY KEY (id_pedido, id)
 );
 
 CREATE TABLE Pedidos_Entregues (
@@ -120,18 +133,8 @@ CREATE TABLE Pedidos_Entregues (
   PRIMARY KEY (id),
   foreign key (id_comprador) REFERENCES Comprador (id),
   foreign key (id_vendedor) REFERENCES Vendedor (id)
-  --id uuid default uuid_generate_v4(),
-  --id_pedido uuid,
-  --foreign key (id_pedido) references Pedido(id),
-  --PRIMARY KEY (id_pedido, id)
 );
 
--- criação de view para calcular o volume do produto
-CREATE VIEW VolumeProduto (id, nome, volume) AS
-SELECT p.id as id_produto,
-  p.nome as nome,
-  (p.comprimento * p.largura * p.altura) as volume
-FROM Produto p;
 
 -- criação de uma visão para apresentar as vendas de um vendedor em um determinado mês, a quantidade de itens vendidos e o valor total das suas vendas
 CREATE VIEW VendasPorVendedor (id, quantidade, total) AS
@@ -160,7 +163,7 @@ JOIN Vendedor ON p.id_vendedor = vendedor.id
 JOIN Comprador c ON p.id_comprador = c.id
 JOIN Produto prod ON v.id_produto = prod.id
 JOIN Usuario usr_v ON Vendedor.cpf_usuario = usr_v.cpf
-JOIN Usuario usr_c ON Comprador.cpf_usuario = usr_c.cpf;
+JOIN Usuario usr_c ON c.cpf_usuario = usr_c.cpf;
 
 SELECT *
 FROM DadosPedido
@@ -187,9 +190,23 @@ BEGIN
 			if (new.status='Entregue') then
 				INSERT INTO pedidos_entregues(id, timestamp, id_comprador, id_vendedor)
 				VALUES (new.id, new.timestamp, new.id_comprador, new.id_vendedor);
+			
+				INSERT INTO vendido_entregue  (quantidade, id_pedido, id_produto)
+				select quantidade, id_pedido, id_produto from vendido where id_pedido = new.id;
+			
+			    delete from vendido where id_pedido = new.id;
+				delete from Pedido where id = new.id;
+				
+				
 			elsif (new.status='Cancelado') then
-				INSERT INTO pedidos_cancelados(id, timestamp, id_comprador, id_vendedor)
+				INSERT INTO pedidos_cancelados (id, timestamp, id_comprador, id_vendedor)
 				VALUES (new.id, new.timestamp, new.id_comprador, new.id_vendedor);
+			
+				INSERT INTO vendido_cancelado  (quantidade, id_pedido, id_produto)
+				select quantidade, id_pedido, id_produto from vendido where id_pedido = new.id;
+			
+			    delete from vendido where id_pedido = new.id;
+				delete from Pedido where id = new.id;	
 			end if;
 			return new;
 	end;
@@ -386,12 +403,31 @@ VALUES ('edcecad6-3e10-11ed-b878-0242ac120002', '909020002', '05965350074');
 
 -- inserindo pedidos
 INSERT INTO Pedido (id, timestamp, status, id_comprador, id_vendedor)
-VALUES ('e80819a4-3e10-11ed-b878-0242ac120002', TO_TIMESTAMP('2022-08-25 11:35:04', 'YYYY-MM-DD HH24:MI:SS'), 'Ativo', 'f6c48b12-3e10-11ed-b878-0242ac120002', 'f23949ac-3e10-11ed-b878-0242ac120002');
+VALUES ('e80819a4-3e10-11ed-b878-0242ac120002', TO_TIMESTAMP('2022-08-25 11:35:04', 'YYYY-MM-DD HH24:MI:SS'), 'Criado', 'f6c48b12-3e10-11ed-b878-0242ac120002', 'f23949ac-3e10-11ed-b878-0242ac120002');
 
 -- inserindo pedidos vendidos
 INSERT INTO Vendido (quantidade, id_pedido, id_produto)
 VALUES (2, 'e80819a4-3e10-11ed-b878-0242ac120002', '4b66c5c8-3e10-11ed-b878-0242ac120002');
 
--- atualizando status de pedidos
-INSERT INTO Pedido (id, timestamp, status, id_comprador, id_vendedor)
-VALUES ('e80819a4-3e10-11ed-b878-0242ac120002', TO_TIMESTAMP('2022-08-25 11:35:04', 'YYYY-MM-DD HH24:MI:SS'), 'Cancelado', 'f6c48b12-3e10-11ed-b878-0242ac120002', 'f23949ac-3e10-11ed-b878-0242ac120002');
+
+-- atualizando os status do pedido
+update Pedido set status = 'Preparação' where id = 'e80819a4-3e10-11ed-b878-0242ac120002';
+update Pedido set status = 'Transporte' where id = 'e80819a4-3e10-11ed-b878-0242ac120002';
+update Pedido set status = 'Entregue' where id = 'e80819a4-3e10-11ed-b878-0242ac120002';
+update Pedido set status = 'Cancelado' where id = 'e80819a4-3e10-11ed-b878-0242ac120002';
+
+
+select * from vendido v;
+select * from pedido;
+select * from pedidos_entregues pe;
+select * from pedidos_cancelados pc;
+select * from vendido_entregue ve;
+select * from vendido_cancelado vc;
+
+delete from vendido_cancelado;
+delete from vendido_entregue;
+delete from vendido;
+delete from pedido;
+delete from pedidos_entregues pe;
+delete from pedidos_cancelados pc;
+
