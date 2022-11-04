@@ -12,10 +12,24 @@
 -- - vendedor e comprador podem ter mais de um endereço
 -- - pode ocorrer um cenário em que o vendedor e o comprador são o mesmo usuário
 
-DROP TABLE IF EXISTS comprador CASCADE;
-
 create extension "uuid-ossp";
 
+-- exclusão de tabelas para evitar conflito
+
+DROP TABLE IF EXISTS Produto CASCADE;
+DROP TABLE IF EXISTS Usuario CASCADE;
+DROP TABLE IF EXISTS Comprador CASCADE;
+DROP TABLE IF EXISTS Vendedor CASCADE;
+DROP TABLE IF EXISTS Pedido CASCADE;
+DROP TABLE IF EXISTS Vendido CASCADE;
+DROP TABLE IF EXISTS Vendido_Entregue CASCADE;
+DROP TABLE IF EXISTS Vendido_Cancelado CASCADE;
+DROP TABLE IF EXISTS Endereco CASCADE;
+DROP TABLE IF EXISTS Mora_em CASCADE;
+DROP TABLE IF EXISTS Pedidos_Cancelados CASCADE;
+DROP TABLE IF EXISTS Pedidos_Entregues CASCADE;
+
+-- criação de tabelas
 
 CREATE TABLE Produto (
   id uuid default uuid_generate_v4(),
