@@ -83,6 +83,27 @@ CREATE TABLE Pedido (
   foreign key (id_vendedor) REFERENCES Vendedor (id)
 );
 
+CREATE TABLE Pedidos_Entregues (
+  id uuid default uuid_generate_v4(),
+  timestamp DATE,
+  id_comprador uuid,
+  id_vendedor uuid,
+  PRIMARY KEY (id),
+  foreign key (id_comprador) REFERENCES Comprador (id),
+  foreign key (id_vendedor) REFERENCES Vendedor (id)
+);
+
+CREATE TABLE Pedidos_Cancelados (
+  id uuid default uuid_generate_v4(),
+  timestamp DATE,
+  id_comprador uuid,
+  id_vendedor uuid,
+  PRIMARY KEY (id),
+  foreign key (id_comprador) REFERENCES Comprador (id),
+  foreign key (id_vendedor) REFERENCES Vendedor (id)
+);
+
+
 CREATE TABLE Vendido (
   quantidade INTEGER,
   id_pedido uuid,
@@ -128,27 +149,6 @@ create table Mora_em (
   foreign key (cpf_usuario) references Usuario(cpf),
   foreign key (id_endereco) references Endereco(id)
 );
-
-CREATE TABLE Pedidos_Cancelados (
-  id uuid default uuid_generate_v4(),
-  timestamp DATE,
-  id_comprador uuid,
-  id_vendedor uuid,
-  PRIMARY KEY (id),
-  foreign key (id_comprador) REFERENCES Comprador (id),
-  foreign key (id_vendedor) REFERENCES Vendedor (id)
-);
-
-CREATE TABLE Pedidos_Entregues (
-  id uuid default uuid_generate_v4(),
-  timestamp DATE,
-  id_comprador uuid,
-  id_vendedor uuid,
-  PRIMARY KEY (id),
-  foreign key (id_comprador) REFERENCES Comprador (id),
-  foreign key (id_vendedor) REFERENCES Vendedor (id)
-);
-
 
 -- criação de uma visão para apresentar as vendas de um vendedor em um determinado mês, a quantidade de itens vendidos e o valor total das suas vendas
 CREATE VIEW VendasPorVendedor (id, quantidade, total) AS
