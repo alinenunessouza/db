@@ -1,8 +1,8 @@
+
+from app.database.models.product import product
 import datetime
 
-class product:
-
-    def create(cursor, 
+def create(cursor, 
             conexao,
             self,
             id:int=None, 
