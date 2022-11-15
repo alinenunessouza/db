@@ -1,8 +1,8 @@
 import datetime
 
-class ProdutoRepository:
+class product:
 
-    def criar(cursor, 
+    def create(cursor, 
             conexao,
             self,
             id:int=None, 

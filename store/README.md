@@ -14,4 +14,7 @@ Usuario -> comprar, vender
 - View:
 Estoque
 
+## References:
+- https://github.com/kirillzhosul/api
+
 

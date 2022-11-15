@@ -1,6 +1,6 @@
 import datetime
 
-class ProdutoDb:
+class product:
 
     def __init__(self, 
             id:int=None, 
