@@ -2,7 +2,8 @@
   - *pipenv install* 
 
 ## How to run:
-  - *uvicorn main:app --reload* 
+  - Navigate to the `store/src/api` folder 
+  - *uvicorn app.main:app --reload* 
 
 ## Funcionalidades:
 
