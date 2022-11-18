@@ -5,6 +5,12 @@
   - Navigate to the `store/src/api` folder 
   - *uvicorn app.main:app --reload* 
 
+## Endpoints
+
+- /docs
+- /users
+
+
 ## Funcionalidades:
 
 - Classes:
