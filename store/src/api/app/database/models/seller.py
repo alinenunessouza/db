@@ -1,6 +1,5 @@
 '''Table Vendedor'''
 
-
 class seller:
 
     def __init__(self, 

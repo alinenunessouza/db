@@ -1,7 +1,5 @@
 ''''Table Vendido'''
 
-import datetime
-
 class sold:
 
     def __init__(self, 

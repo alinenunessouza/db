@@ -1,7 +1,5 @@
 '''Table Vendido_Cancelado '''
 
-import datetime
-
 class canceled_sold:
 
     def __init__(self, 
