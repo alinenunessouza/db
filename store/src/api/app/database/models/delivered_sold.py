@@ -1,8 +1,6 @@
-''''Table Vendido'''
+'''Table Vendido_Entregue '''
 
-import datetime
-
-class sold:
+class delivered_sold:
 
     def __init__(self, 
             quantidade:int=None,

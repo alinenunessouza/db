@@ -1,8 +1,8 @@
-''''Table Vendido'''
+'''Table Vendido_Cancelado '''
 
 import datetime
 
-class sold:
+class canceled_sold:
 
     def __init__(self, 
             quantidade:int=None,

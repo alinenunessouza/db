@@ -1,3 +1,9 @@
+'''Table Pedido
+
+-- ao excluir um Pedido, todos os itens relacionados a esta venda devem ser excluídos da tabela de vendas
+-- ao mesmo tempo, deve ser possível excluir um item de uma venda 
+'''
+
 import datetime
 
 class order:

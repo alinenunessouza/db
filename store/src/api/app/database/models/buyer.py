@@ -1,3 +1,4 @@
+'''Table Comprador'''
 
 class buyer:
 

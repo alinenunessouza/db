@@ -1,3 +1,7 @@
+'''
+Table Pedidos_Entregues 
+'''
+
 import datetime
 
 class orders_delivered:
