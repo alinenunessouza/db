@@ -9,7 +9,8 @@
 
 - /docs
 - /users
-
+- /products
+- /orders
 
 ## Funcionalidades:
 
