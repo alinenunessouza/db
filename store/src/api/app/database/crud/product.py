@@ -2,8 +2,7 @@
 from app.database.models.product import product
 import datetime
 
-def create(cursor, 
-            conexao,
+def create(conexao,
             self,
             id:int=None, 
             fabricacao_timestamp:datetime=None,
@@ -25,6 +24,7 @@ def create(cursor,
         self._massa = massa
         self._codigo_barra = codigo_barra
         self._estoque = estoque
+        cursor = conexao.cursor()
         cursor.execute("INSERT INTO Produto VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
             (id,
             fabricacao_timestamp,

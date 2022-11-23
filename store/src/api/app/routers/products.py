@@ -24,8 +24,7 @@ async def add(custo_unitario:float, nome:str):
     '''productService.Add(custo_unitario, nome, ...)'''
     return "Produto adicionado com sucesso"
 
-'''remove um produto do site'''
-@router.delete("/products/{id}", tags=["products"])
-async def add(id:str):
+@router.delete("/products/{id}", tags=["products"], description='remove um produto do site buscando pelo id')
+async def remove(id:str):
     '''productService.Delete(id)'''
     return "Produto removido com sucesso"

@@ -11,6 +11,7 @@
 - /users
 - /products
 - /orders
+- /cart
 
 ## Funcionalidades:
 
