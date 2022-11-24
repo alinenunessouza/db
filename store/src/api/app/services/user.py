@@ -17,3 +17,6 @@ def get_all():
 
 def create(dto: UserDTO):
     return user.create(cursor, dto.cpf, dto.nome, dto.sobrenome, dto.email, dto.telefone)
+
+def delete(id: str):
+    return user.delete_by_id(cursor, id)

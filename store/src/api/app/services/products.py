@@ -17,3 +17,6 @@ def get_all():
 
 def create(dto: ProductDTO):
     return product.create(cursor, dto.id, dto.fabricacao_timestamp, dto.custo_unitario, dto.nome, dto.altura, dto.comprimento, dto.largura, dto.massa, dto.codigo_barra, dto.estoque)
+
+def delete(id: str):
+    return product.delete_by_id(cursor, id)

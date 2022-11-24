@@ -51,3 +51,16 @@ def create(
         ),
     )
     conexao.commit()
+
+def delete_by_id(
+    conexao,
+    id: int = None,
+):
+    cursor = conexao.cursor()
+    cursor.execute(
+        "REMOVE Produto WHERE Id = (%s)",
+        (
+            id
+        ),
+    )
+    conexao.commit()

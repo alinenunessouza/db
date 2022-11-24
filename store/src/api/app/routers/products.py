@@ -26,5 +26,5 @@ async def add(request: products.ProductDTO):
     description="remove um produto do site buscando pelo id",
 )
 async def remove(id: str):
-    """productService.Delete(id)"""
+    products.delete(id)
     return "Produto removido com sucesso"

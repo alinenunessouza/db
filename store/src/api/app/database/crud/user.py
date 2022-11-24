@@ -21,3 +21,16 @@ def create(
         (cpf, nome, sobrenome, email, telefone),
     )
     conexao.commit()
+
+def delete_by_id(
+    conexao,
+    id: int = None,
+):
+    cursor = conexao.cursor()
+    cursor.execute(
+        "REMOVE Usuario WHERE Id = (%s)",
+        (
+            id
+        ),
+    )
+    conexao.commit()

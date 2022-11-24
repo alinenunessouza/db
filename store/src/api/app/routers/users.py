@@ -12,6 +12,11 @@ async def create(request: user.UserDTO):
     user.create(request)
     return request.json()
 
+@router.delete("/users", tags=["users"], description="Remove um perfil de usuário no site.")
+async def delete(id: str):
+    user.delete(id)
+    return "Perfil removido com sucesso"
+
 # @router.put(
 #     "/users", tags=["users"], description="Criar um novo perfil de usuário no site."
 # )
