@@ -8,14 +8,12 @@ def find_all(self, cursor):
         retorno.append(Order(item[0], item[1], item[2], item[3], item[4]))
     return retorno
 
-
 def find_by_id(self, cursor, id):
     cursor.execute("SELECT * FROM Pedido WHERE id = '" + id + "';")
     retorno = []
     for item in cursor.fetchall():
         retorno.append(Order(item[0], item[1], item[2], item[3], item[4]))
     return retorno
-
 
 def update_by_id(self, cursor, conexao, id, status):
     cursor.execute(
