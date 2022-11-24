@@ -2,7 +2,6 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-
 @router.put(
     "/cart",
     tags=["cart"],
@@ -10,7 +9,6 @@ router = APIRouter()
 )
 async def add(id: str):
     return "Produto adicionado ao carrinho com sucesso!"
-
 
 @router.put(
     "/cart/new_order",

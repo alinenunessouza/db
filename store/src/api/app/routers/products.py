@@ -3,7 +3,6 @@ from app.services import product
 
 router = APIRouter()
 
-
 @router.get(
     "/products",
     tags=["products"],
@@ -11,7 +10,6 @@ router = APIRouter()
 )
 async def get_all():
     return product.get_all()
-
 
 @router.put(
     "/products",
@@ -21,7 +19,6 @@ async def get_all():
 async def add(custo_unitario: float, nome: str):
     """productService.Add(custo_unitario, nome, ...)"""
     return "Produto adicionado com sucesso"
-
 
 @router.delete(
     "/products/{id}",

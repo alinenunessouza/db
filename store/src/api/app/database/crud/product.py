@@ -1,7 +1,6 @@
 from app.database.models.product import Product
 import datetime
 
-
 def find_all(cursor):
     cursor.execute("SELECT * FROM Produto")
     result = []
@@ -21,7 +20,6 @@ def find_all(cursor):
             )
         )
     return result
-
 
 def create(
     conexao,

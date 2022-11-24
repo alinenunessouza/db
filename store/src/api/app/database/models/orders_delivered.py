@@ -4,7 +4,6 @@ Table Pedidos_Entregues
 
 import datetime
 
-
 class OrdersDelivered:
     def __init__(
         self,

@@ -2,7 +2,6 @@
 
 import datetime
 
-
 class OrderData:
     def __init__(
         self,
