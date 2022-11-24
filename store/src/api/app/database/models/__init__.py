@@ -2,10 +2,6 @@
     Database ORM models.
 """
 
-from . import (
-    user, product
-)
+from . import user, product
 
-__all__ = [
-    "user", "product"
-]
+__all__ = ["user", "product"]

@@ -1,16 +1,18 @@
-'''
+"""
 Table Pedidos_Entregues 
-'''
+"""
 
 import datetime
 
-class orders_delivered:
 
-    def __init__(self, 
-            id:int=None,
-            timestamp:datetime=None,
-            id_comprador:int=None,
-            id_vendedor:int=None):
+class orders_delivered:
+    def __init__(
+        self,
+        id: int = None,
+        timestamp: datetime = None,
+        id_comprador: int = None,
+        id_vendedor: int = None,
+    ):
         self._id = id
         self._timestamp = timestamp
         self._id_comprador = id_comprador

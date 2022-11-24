@@ -1,10 +1,8 @@
 from app.database import dependencies
-from app.database import crud
+from app.database.crud import product
 
-class product_service:
+cursor = dependencies.get_connection()
 
-    def __init__(self):
-        self.conn = dependencies.get_connection
 
-    def add(self, id: str, fabricacao_timestamp):
-        crud.product.create(conn, id, fabricacao_timestamp)
+def get_all():
+    return product.find_all(cursor)
