@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from app.services import user
 
 router = APIRouter()
 
-@router.get("/users/", tags=["users"])
+@router.get("/users", tags=["users"])
 async def get_all():
-    return [{"username": "Rick"}, {"username": "Morty"}]
+    return user.get_all()
 
 @router.get("/users/me", tags=["users"])
 async def read_user_me():
