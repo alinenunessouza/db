@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.services import product
+from app.services import products
 
 router = APIRouter()
 
@@ -9,15 +9,15 @@ router = APIRouter()
     description="Lista todos os produtos disponíveis no site",
 )
 async def get_all():
-    return product.get_all()
+    return products.get_all()
 
 @router.put(
     "/products",
     tags=["products"],
     description="Adiciona um novo produto a listagem de produtos a venda no site",
 )
-async def add(custo_unitario: float, nome: str):
-    """productService.Add(custo_unitario, nome, ...)"""
+async def add(request: products.ProductDTO):
+    products.create(request)
     return "Produto adicionado com sucesso"
 
 @router.delete(

@@ -1,22 +1,15 @@
 from fastapi import APIRouter, Request
 from app.services import user
-from pydantic import BaseModel
 
 router = APIRouter()
-
-class UserDTO(BaseModel):
-  cpf: str
-  nome: str
-  sobrenome: str
-  email: str
-  telefone: str
 
 @router.get("/users", tags=["users"])
 async def get_all():
     return user.get_all()
 
-@router.post("/users", tags=["users"])
-async def create(request: UserDTO):
+@router.post("/users", tags=["users"], description="Criar um novo perfil de usuário no site.")
+async def create(request: user.UserDTO):
+    user.create(request)
     return request.json()
 
 # @router.put(
