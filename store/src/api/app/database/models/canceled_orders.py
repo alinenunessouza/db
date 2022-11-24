@@ -5,7 +5,7 @@ Table Pedidos_Cancelados
 import datetime
 
 
-class canceled_orders:
+class CanceledOrders:
     def __init__(
         self,
         id: int = None,

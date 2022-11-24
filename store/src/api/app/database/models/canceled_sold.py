@@ -1,7 +1,7 @@
 """Table Vendido_Cancelado """
 
 
-class canceled_sold:
+class CancelledSold:
     def __init__(
         self, quantidade: int = None, id_pedido: int = None, id_produto: int = None
     ):

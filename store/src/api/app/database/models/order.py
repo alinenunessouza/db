@@ -7,7 +7,7 @@
 import datetime
 
 
-class order:
+class Order:
     def __init__(
         self,
         id: int = None,

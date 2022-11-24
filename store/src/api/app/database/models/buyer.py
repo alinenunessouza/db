@@ -1,7 +1,7 @@
 """Table Comprador"""
 
 
-class buyer:
+class Buyer:
     def __init__(self, id: int = None, cartao: str = None, cpf_usuario: str = None):
         self._id = id
         self._cartao = cartao

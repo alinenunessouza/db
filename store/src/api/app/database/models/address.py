@@ -1,7 +1,7 @@
 """Table Endereco"""
 
 
-class address:
+class Address:
     def __init__(
         self,
         id: int = None,

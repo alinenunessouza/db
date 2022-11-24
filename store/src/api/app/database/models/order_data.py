@@ -3,7 +3,7 @@
 import datetime
 
 
-class order_data:
+class OrderData:
     def __init__(
         self,
         id: int = None,

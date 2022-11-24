@@ -1,4 +1,4 @@
-from app.database.models.product import product
+from app.database.models.product import Product
 import datetime
 
 
@@ -7,7 +7,7 @@ def find_all(cursor):
     result = []
     for item in cursor.fetchall():
         result.append(
-            product(
+            Product(
                 item[0],
                 item[1],
                 item[2],

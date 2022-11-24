@@ -1,7 +1,7 @@
 """Table Vendido_Entregue """
 
 
-class delivered_sold:
+class DeliveredSold:
     def __init__(
         self, quantidade: int = None, id_pedido: int = None, id_produto: int = None
     ):

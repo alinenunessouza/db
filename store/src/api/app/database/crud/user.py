@@ -1,11 +1,11 @@
-from app.database.models.user import user
+from app.database.models.user import User
 
 
 def find_all(cursor):
     cursor.execute("SELECT * FROM Produto")
     result = []
     for item in cursor.fetchall():
-        result.append(user(item[0], item[1], item[2], item[3], item[4]))
+        result.append(User(item[0], item[1], item[2], item[3], item[4]))
     return result
 
 

@@ -5,7 +5,7 @@ Table Pedidos_Entregues
 import datetime
 
 
-class orders_delivered:
+class OrdersDelivered:
     def __init__(
         self,
         id: int = None,
