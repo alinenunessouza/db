@@ -44,7 +44,7 @@ CREATE TABLE Usuario (
   PRIMARY KEY (cpf)
 );
 
-CREATE TABLE Historico_Usuario (
+CREATE TABLE usuario_historico (
   cpf CHAR (11),
   nome char (10),
   sobrenome char (30),
@@ -197,9 +197,8 @@ CREATE OR REPLACE FUNCTION move_historico_usuario()
 $$
 BEGIN
 			
-				INSERT INTO usuario_historico(id, timestamp, id_comprador, id_vendedor)
-				VALUES (old.id, old.timestamp, old.id_comprador, old.id_vendedor);
-			  DELETE from usuario where cpf = old.cpf;
+			INSERT INTO usuario_historico(cpf, nome, sobrenome, email, telefone)
+			VALUES (old.cpf, old.nome, old.sobrenome, old.email, old.telefone);
 			return old;
 	end;
 $$
@@ -207,7 +206,7 @@ $$
 DROP trigger IF EXISTS MonitoraUsuario ON Usuario;
 
 CREATE TRIGGER MonitoraUsuario 
-before delete ON Usuario
+after delete on Usuario
 FOR EACH ROW 
 EXECUTE FUNCTION move_historico_usuario();
 
