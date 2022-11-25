@@ -14,16 +14,6 @@ def find_by_cpf(conn, cpf: str):
     result = cursor.fetchone()
     return User(result[0], result[1], result[2], result[3], result[4])
     
-def update(conn, 
-    cpf: str, 
-    nome: str = None,
-    sobrenome: str = None,
-    email: str = None,
-    telefone: str = None
-):
-    cursor = conn.cursor()
-    cursor.execute(f"UPDATE Usuario SET nome = '{nome}', sobrenome = '{sobrenome}', email = '{email}', telefone = '{telefone}' WHERE cpf = '{cpf}'")
-
 def create(
     conn,
     cpf: str = None,
@@ -38,14 +28,19 @@ def create(
         (cpf, nome, sobrenome, email, telefone),
     )
 
-def delete_by_id(
-    conn,
-    id: int = None,
+def update(conn, 
+    cpf: str, 
+    nome: str = None,
+    sobrenome: str = None,
+    email: str = None,
+    telefone: str = None
 ):
     cursor = conn.cursor()
-    cursor.execute(
-        "REMOVE Usuario WHERE Id = (%s)",
-        (
-            id
-        ),
-    )
+    cursor.execute(f"UPDATE Usuario SET nome = '{nome}', sobrenome = '{sobrenome}', email = '{email}', telefone = '{telefone}' WHERE cpf = '{cpf}'")
+
+def delete_by_cpf(
+    conn,
+    cpf: str = None,
+):
+    cursor = conn.cursor()
+    cursor.execute(f"DELETE FROM Usuario WHERE cpf = '{cpf}'")

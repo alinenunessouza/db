@@ -30,5 +30,5 @@ def update(cpf: str, dto: UpdateUserDTO):
 def create(dto: CreateUserDTO):
     return user.create(conn, dto.cpf, dto.nome, dto.sobrenome, dto.email, dto.telefone)
 
-def delete(id: str):
-    return user.delete_by_id(conn, id)
+def delete(cpf: str):
+    return user.delete_by_cpf(conn, cpf)
