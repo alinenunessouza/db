@@ -1,7 +1,9 @@
 from fastapi import APIRouter
 from app.services import product
+from starlette.status import HTTP_204_NO_CONTENT, HTTP_201_CREATED
 
 router = APIRouter()
+
 
 @router.get(
     "/products",
@@ -11,6 +13,7 @@ router = APIRouter()
 async def get_all():
     return product.get_all()
 
+
 @router.get(
     "/products/{id}",
     tags=["products"],
@@ -19,23 +22,27 @@ async def get_all():
 async def get_by_id(id: str):
     return product.get_by_id(id)
 
+
 @router.post(
-    "/products", tags=["products"], description="Adiciona um novo produto a listagem de produtos a venda no site."
+    "/products",
+    tags=["products"],
+    description="Adiciona um novo produto a listagem de produtos a venda no site.",
+    status_code=HTTP_201_CREATED,
 )
-async def create(request: product.CreateProductDTO):
+async def create(request: product.ProductDTO):
     product.create(request)
     return request.json()
 
 
+@router.put(
+    "/products/{id}",
+    tags=["products"],
+    description="Adiciona um novo produto a listagem de produtos a venda no site",
+)
+async def update(id: str, request: product.ProductDTO):
+    product.update(id, request)
+    return request.json()
 
-# @router.put(
-#     "/products",
-#     tags=["products"],
-#     description="Adiciona um novo produto a listagem de produtos a venda no site",
-# )
-# async def add(request: product.ProductDTO):
-#     product.create(request)
-#     return "Produto adicionado com sucesso"
 
 # @router.delete(
 #     "/products/{id}",

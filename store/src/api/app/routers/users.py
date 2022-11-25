@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.services import user
-from starlette.status import HTTP_204_NO_CONTENT
+from starlette.status import HTTP_204_NO_CONTENT, HTTP_201_CREATED
 
 router = APIRouter()
 
@@ -11,7 +11,10 @@ async def get_all():
 
 
 @router.post(
-    "/users", tags=["users"], description="Criar um novo perfil de usuário no site."
+    "/users",
+    tags=["users"],
+    description="Criar um novo perfil de usuário no site",
+    status_code=HTTP_201_CREATED,
 )
 async def create(request: user.CreateUserDTO):
     user.create(request)

@@ -61,6 +61,33 @@ def create(
         VALUES('{fabricacao_timestamp}','{custo_unitario}','{nome}','{altura}','{comprimento}','{largura}','{massa}','{codigo_barra}','{estoque}')"""
     )
 
+def update(
+    conn,
+    id: str,
+    fabricacao_timestamp: datetime = None,
+    custo_unitario: Decimal = None,
+    nome: str = None,
+    altura: Decimal = None,
+    comprimento: Decimal = None,
+    largura: Decimal = None,
+    massa: Decimal = None,
+    codigo_barra: str = None,
+    estoque: int = None,
+):
+  cursor = conn.cursor()
+  cursor.execute(
+    f"""UPDATE Produto SET 
+        fabricacao_timestamp = '{fabricacao_timestamp}',
+        custo_unitario = '{custo_unitario}',
+        nome = '{nome}',
+        altura = '{altura}',
+        comprimento = '{comprimento}',
+        largura = '{largura}',
+        massa = '{massa}',
+        codigo_barra = '{codigo_barra}',
+        estoque = '{estoque}'
+      WHERE id = '{id}'"""
+  )
 
 def delete_by_id(
     conexao,

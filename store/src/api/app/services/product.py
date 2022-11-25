@@ -7,7 +7,7 @@ import datetime
 conn = dependencies.get_connection()
 
 # remover daqui
-class CreateProductDTO(BaseModel):
+class ProductDTO(BaseModel):
     fabricacao_timestamp: str
     custo_unitario: str
     nome: str
@@ -27,7 +27,7 @@ def get_by_id(id: str):
     return product.find_by_id(conn, id)
 
 
-def create(dto: CreateProductDTO):
+def create(dto: ProductDTO):
     return product.create(
         conn,
         dto.fabricacao_timestamp,
@@ -39,6 +39,22 @@ def create(dto: CreateProductDTO):
         Decimal(dto.massa),
         dto.codigo_barra,
         dto.estoque,
+    )
+
+
+def update(id: str, dto: ProductDTO):
+    product.update(
+        conn,
+        id,
+        dto.fabricacao_timestamp,
+        dto.custo_unitario,
+        dto.nome,
+        dto.altura,
+        dto.comprimento,
+        dto.largura,
+        dto.massa,
+        dto.codigo_barra,
+        dto.estoque
     )
 
 
