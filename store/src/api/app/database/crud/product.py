@@ -1,7 +1,8 @@
 from app.database.models.product import Product
 import datetime
 
-def find_all(cursor):
+def find_all(conn):
+    cursor = conn.cursor()
     cursor.execute("SELECT * FROM Produto")
     result = []
     for item in cursor.fetchall():
