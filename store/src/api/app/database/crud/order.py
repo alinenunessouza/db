@@ -1,4 +1,6 @@
 from app.database.models.order import Order
+# using time module
+import time
 
 def find_all(cursor):
     cursor.execute("SELECT * FROM Pedido;")
@@ -14,14 +16,14 @@ def find_by_id(cursor, id):
     return None
 
 def create(conexao, id, id_products):
+    id_vendedor = "231f342343"
     cursor = conexao.cursor()
     cursor.execute(
-        "INSERT INTO Pedido VALUES(%s,%s,%s,%s,%s)",
+        "INSERT INTO Pedido VALUES(%s,%s,%s,%s)",
         (
+        "Criado",
+        time.time(),
         id,
-        status,
-        timestamp,
-        id_comprador,
         id_vendedor
         ) 
     )
