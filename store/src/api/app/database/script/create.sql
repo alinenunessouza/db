@@ -28,7 +28,11 @@ CREATE TABLE Produto (
   massa DECIMAL,
   codigo_barra char (30),
   estoque INTEGER,
-  PRIMARY KEY (id)
+  avaliacao INTEGER,
+  PRIMARY KEY (id),
+  check (altura >= 0 and altura <= 1000),
+  check (comprimento >= 0 and comprimento <= 1000),
+  check (largura >= 0 and largura <= 1000)
 );
 
 CREATE TABLE Usuario (

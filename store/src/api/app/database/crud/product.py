@@ -19,7 +19,7 @@ def find_all(conn):
                 item[6],
                 item[7],
                 item[8],
-                item[9],
+                item[9]
             )
         )
     return result
@@ -39,7 +39,7 @@ def find_by_id(conn, id: str):
         result[6],
         result[7],
         result[8],
-        result[9],
+        result[9]
     )
 
 

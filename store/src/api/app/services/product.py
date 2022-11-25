@@ -18,7 +18,6 @@ class ProductDTO(BaseModel):
     codigo_barra: str
     estoque: int
 
-
 def get_all():
     return product.find_all(conn)
 
