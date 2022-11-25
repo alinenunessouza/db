@@ -196,7 +196,6 @@ CREATE OR REPLACE FUNCTION move_historico_usuario()
   AS
 $$
 BEGIN
-			
 			INSERT INTO usuario_historico(cpf, nome, sobrenome, email, telefone)
 			VALUES (old.cpf, old.nome, old.sobrenome, old.email, old.telefone);
 			return old;
@@ -211,44 +210,12 @@ FOR EACH ROW
 EXECUTE FUNCTION move_historico_usuario();
 
 
--- trigger pedido
-
-CREATE OR REPLACE FUNCTION move_pedido()
-  RETURNS TRIGGER 
-  LANGUAGE PLPGSQL
-  AS
-$$
-BEGIN
-			if (new.status='Entregue') then
-				INSERT INTO pedidos_entregues(id, timestamp, id_comprador, id_vendedor)
-				VALUES (new.id, new.timestamp, new.id_comprador, new.id_vendedor);
-			
-				INSERT INTO vendido_entregue  (quantidade, id_pedido, id_produto)
-				select quantidade, id_pedido, id_produto from vendido where id_pedido = new.id;
-			
-			    delete from vendido where id_pedido = new.id;
-				delete from Pedido where id = new.id;
-				
-				
-			elsif (new.status='Cancelado') then
-				INSERT INTO pedidos_cancelados (id, timestamp, id_comprador, id_vendedor)
-				VALUES (new.id, new.timestamp, new.id_comprador, new.id_vendedor);
-			
-				INSERT INTO vendido_cancelado  (quantidade, id_pedido, id_produto)
-				select quantidade, id_pedido, id_produto from vendido where id_pedido = new.id;
-			
-			    delete from vendido where id_pedido = new.id;
-				delete from Pedido where id = new.id;	
-			end if;
-			return new;
-	end;
-$$
-
-
-DROP trigger IF EXISTS MonitoraPedido ON Pedido;
-
-CREATE TRIGGER MonitoraPedido 
-AFTER UPDATE OF status ON Pedido
-FOR EACH ROW 
-EXECUTE FUNCTION move_pedido();
  
+
+
+
+CREATE VIEW VolumeProduto (id, nome, volume) AS
+SELECT p.id as id_produto,
+  p.nome as nome,
+  (p.comprimento * p.largura * p.altura) as volume
+FROM Produto p;
