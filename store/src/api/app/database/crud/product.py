@@ -61,6 +61,7 @@ def create(
         VALUES('{fabricacao_timestamp}','{custo_unitario}','{nome}','{altura}','{comprimento}','{largura}','{massa}','{codigo_barra}','{estoque}')"""
     )
 
+
 def update(
     conn,
     id: str,
@@ -74,9 +75,9 @@ def update(
     codigo_barra: str = None,
     estoque: int = None,
 ):
-  cursor = conn.cursor()
-  cursor.execute(
-    f"""UPDATE Produto SET 
+    cursor = conn.cursor()
+    cursor.execute(
+        f"""UPDATE Produto SET 
         fabricacao_timestamp = '{fabricacao_timestamp}',
         custo_unitario = '{custo_unitario}',
         nome = '{nome}',
@@ -87,15 +88,12 @@ def update(
         codigo_barra = '{codigo_barra}',
         estoque = '{estoque}'
       WHERE id = '{id}'"""
-  )
+    )
+
 
 def delete_by_id(
-    conexao,
-    id: int = None,
+    conn,
+    id: str = None,
 ):
-    cursor = conexao.cursor()
-    cursor.execute(
-        "REMOVE Produto WHERE Id = (%s)",
-        (id),
-    )
-    conexao.commit()
+    cursor = conn.cursor()
+    cursor.execute(f"DELETE FROM Produto WHERE id = '{id}'")

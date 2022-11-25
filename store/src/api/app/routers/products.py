@@ -44,11 +44,11 @@ async def update(id: str, request: product.ProductDTO):
     return request.json()
 
 
-# @router.delete(
-#     "/products/{id}",
-#     tags=["products"],
-#     description="remove um produto do site buscando pelo id",
-# )
-# async def remove(id: str):
-#     product.delete(id)
-#     return "Produto removido com sucesso"
+@router.delete(
+    "/products/{id}",
+    tags=["products"],
+    description="Remove um produto do site buscando pelo id",
+    status_code=HTTP_204_NO_CONTENT,
+)
+async def remove(id: str):
+    product.delete(id)
