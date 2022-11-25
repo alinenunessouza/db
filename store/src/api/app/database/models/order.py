@@ -13,7 +13,7 @@ class Order:
         status: str = None,
         timestamp: datetime = None,
         id_comprador: int = None,
-        id_vendedor: int = None,
+        id_vendedor: int = None
     ):
         self._id = id
         self._status = status

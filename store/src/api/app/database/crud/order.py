@@ -13,7 +13,23 @@ def find_by_id(cursor, id):
         return Order(item[0], item[1], item[2], item[3], item[4])
     return None
 
-def update_by_id(cursor, conexao, id, status):
+def create(conexao, id, id_products):
+    cursor = conexao.cursor()
+    cursor.execute(
+        "INSERT INTO Pedido VALUES(%s,%s,%s,%s,%s)",
+        (
+        id,
+        status,
+        timestamp,
+        id_comprador,
+        id_vendedor
+        ) 
+    )
+    conexao.commit()
+    return "Pedido realizado com sucesso"
+
+def update_by_id(conexao, id, status):
+    cursor = conexao.cursor()
     cursor.execute(
         "UPDATE Pedido set status = '" + status + "' WHERE id = '" + id + "';"
     )
