@@ -1,4 +1,5 @@
 from app.database.models.product import Product
+from app.database.models.product_volume import ProductVolume
 import datetime
 from decimal import Decimal
 
@@ -97,3 +98,10 @@ def delete_by_id(
 ):
     cursor = conn.cursor()
     cursor.execute(f"DELETE FROM Produto WHERE id = '{id}'")
+
+
+def calculate_volume(conn, id: str = None):
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM VolumeProduto")
+    result = cursor.fetchone()
+    return ProductVolume(result[0], result[1], result[2])

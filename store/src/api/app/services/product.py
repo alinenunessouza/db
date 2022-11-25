@@ -25,6 +25,9 @@ def get_all():
 def get_by_id(id: str):
     return product.find_by_id(conn, id)
 
+def get_volume_by_id(id: str):
+    return product.calculate_volume(conn, id)
+
 
 def create(dto: ProductDTO):
     return product.create(
