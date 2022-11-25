@@ -22,6 +22,14 @@ async def get_all():
 async def get_by_id(id: str):
     return product.get_by_id(id)
 
+@router.get(
+    "/products/{id}/volume",
+    tags=["products"],
+    description="Busca o volume do produto ",
+)
+async def get_volume(id: str):
+    return product.get_volume_by_id(id)
+
 
 @router.post(
     "/products",
