@@ -184,10 +184,36 @@ FROM Produto p
 INNER JOIN (
   SELECT id_produto, SUM(quantidade) AS vendidos
   FROM Vendido GROUP BY id_produto) v ON p.id = v.id_produto;
- 
- 
+  
  
  -- criação de trigger
+
+-- trigger de historico do usuario
+
+CREATE OR REPLACE FUNCTION move_historico_usuario()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
+BEGIN
+			
+				INSERT INTO usuario_historico(id, timestamp, id_comprador, id_vendedor)
+				VALUES (old.id, old.timestamp, old.id_comprador, old.id_vendedor);
+			  DELETE from usuario where cpf = old.cpf;
+			return old;
+	end;
+$$
+
+DROP trigger IF EXISTS MonitoraUsuario ON Usuario;
+
+CREATE TRIGGER MonitoraUsuario 
+before delete ON Usuario
+FOR EACH ROW 
+EXECUTE FUNCTION move_historico_usuario();
+
+
+-- trigger pedido
+
 CREATE OR REPLACE FUNCTION move_pedido()
   RETURNS TRIGGER 
   LANGUAGE PLPGSQL
@@ -226,5 +252,4 @@ CREATE TRIGGER MonitoraPedido
 AFTER UPDATE OF status ON Pedido
 FOR EACH ROW 
 EXECUTE FUNCTION move_pedido();
- 
  
