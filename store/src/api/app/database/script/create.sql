@@ -44,6 +44,15 @@ CREATE TABLE Usuario (
   PRIMARY KEY (cpf)
 );
 
+CREATE TABLE Historico_Usuario (
+  cpf CHAR (11),
+  nome char (10),
+  sobrenome char (30),
+  email char (30),
+  telefone char (9),
+  PRIMARY KEY (cpf)
+);
+
 CREATE TABLE Comprador (
   id uuid default uuid_generate_v4(),
   cartao char (16),
