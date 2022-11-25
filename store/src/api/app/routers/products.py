@@ -16,8 +16,8 @@ async def get_all():
     tags=["products"],
     description="Busca o produto do site correspondente ao identificador informado.",
 )
-async def find_by_id():
-    return products.find_by_id()
+async def get_by_id(id: str):
+    return products.get_by_id(id)
 
 @router.put(
     "/products",

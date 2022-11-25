@@ -15,8 +15,8 @@ class ProductDTO(BaseModel):
 def get_all():
     return product.find_all(conn)
 
-def find_by_id():
-    return product.find_by_id(conn)
+def get_by_id(id: str):
+    return product.find_by_id(conn, id)
 
 def create(dto: ProductDTO):
     return product.create(conn, dto.id, dto.fabricacao_timestamp, dto.custo_unitario, dto.nome, dto.altura, dto.comprimento, dto.largura, dto.massa, dto.codigo_barra, dto.estoque)

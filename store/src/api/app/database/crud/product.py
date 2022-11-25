@@ -22,22 +22,22 @@ def find_all(conn):
         )
     return result
 
-def find_by_id(cursor, id:str):
-    cursor.execute("SELECT * FROM Produto WHERE Id = {id}")
-    for item in cursor.fetchall():
-        return Product(
-                item[0],
-                item[1],
-                item[2],
-                item[3],
-                item[4],
-                item[5],
-                item[6],
-                item[7],
-                item[8],
-                item[9],
-            )
-    return None
+def find_by_id(conn, id:str):
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM Produto WHERE id = '{id}'")
+    result = cursor.fetchone()
+    return Product(
+          result[0],
+          result[1],
+          result[2],
+          result[3],
+          result[4],
+          result[5],
+          result[6],
+          result[7],
+          result[8],
+          result[9],
+      )
 
 def create(
     conexao,
