@@ -21,6 +21,23 @@ def find_all(cursor):
         )
     return result
 
+def find_by_id(cursor, id:str):
+    cursor.execute("SELECT * FROM Produto WHERE Id = {id}")
+    for item in cursor.fetchall():
+        return Product(
+                item[0],
+                item[1],
+                item[2],
+                item[3],
+                item[4],
+                item[5],
+                item[6],
+                item[7],
+                item[8],
+                item[9],
+            )
+    return None
+
 def create(
     conexao,
     id: int = None,

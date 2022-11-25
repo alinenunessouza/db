@@ -3,34 +3,29 @@ from app.services import orders
 
 router = APIRouter()
 
-@router.get("/orders", tags=["orders"])
+# Para uma sugestão de aplicação em um ambiente real, aplicariamos uma paginação nos registros para não sobrecarregar o banco de dados e ter uma degradação no tempo de resposta da API
+@router.get("/orders", tags=["orders"],
+    description="Lista todos os pedidos realizados na loja.")
 async def get_all():
-    return [
-        {
-            "id": "e80819a4-3e10-11ed-b878-0242ac120002",
-            "status": "Criado",
-            "timestamp": "'2022-08-25 11:35:04'",
-            "id_comprador": "f6c48b12-3e10-11ed-b878-0242ac120002",
-            "id_vendedor": "f23949ac-3e10-11ed-b878-0242ac120002",
-        }
-    ]
+    return orders.get_all()
 
-@router.get("/orders/{id}", tags=["orders"])
+@router.get("/orders/{id}", tags=["orders"],
+    description="Busca os dados de um pedido pelo identificador dele.")
 async def get_by_id(id: str):
+    order = orders.find_by_id(id)
     return {
-        "status": "Criado",
-        "timestamp": "'2022-08-25 11:35:04'",
-        "id_comprador": "f6c48b12-3e10-11ed-b878-0242ac120002",
-        "id_vendedor": "f23949ac-3e10-11ed-b878-0242ac120002",
+        "status": order._status,
+        "timestamp": order._timestamp,
+        "id_comprador": order._id_comprador,
+        "id_vendedor": order._id_vendedor,
     }
 
 @router.post(
     "/orders/{id}/status",
     tags=["orders"],
-    description="Atualiza o status de um pedido",
+    description="Atualiza o status de um pedido"
 )
 async def update_by_id_and_status(id:str, status: str):
-    #adicionar validação para conforme o status ele for para uma tabela diferente
     orders.update_by_id_and_status(id,status)
     return {
         "Pedido atualizado com sucesso."

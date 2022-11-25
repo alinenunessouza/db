@@ -11,6 +11,14 @@ router = APIRouter()
 async def get_all():
     return products.get_all()
 
+@router.get(
+    "/products/{id}",
+    tags=["products"],
+    description="Busca o produto do site correspondente ao identificador informado.",
+)
+async def find_by_id():
+    return products.find_by_id()
+
 @router.put(
     "/products",
     tags=["products"],
