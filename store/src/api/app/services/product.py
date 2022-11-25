@@ -47,12 +47,12 @@ def update(id: str, dto: ProductDTO):
         conn,
         id,
         dto.fabricacao_timestamp,
-        dto.custo_unitario,
+        Decimal(dto.custo_unitario),
         dto.nome,
-        dto.altura,
-        dto.comprimento,
-        dto.largura,
-        dto.massa,
+        Decimal(dto.altura),
+        Decimal(dto.comprimento),
+        Decimal(dto.largura),
+        Decimal(dto.massa),
         dto.codigo_barra,
         dto.estoque
     )
