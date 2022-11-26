@@ -1,4 +1,5 @@
-## Gerenciamento de cadastros de usuários e produtos para uma loja (aplicação a ser acoplada para um site de vendas)
+## Gerenciamento de cadastros de usuários e produtos para uma loja
+Aplicação a ser acoplada a um site de vendas.
 
 ## How to install:
   - *pipenv install* 
@@ -11,8 +12,8 @@
 - /docs
 - /users
 - /products
-- /orders (retirado)
-- /cart (retirado)
+- <del> /orders <del>
+- <del> /cart <del>
 
 ## Interface
 - Acessar endpoint /docs ou Postman
