@@ -37,4 +37,5 @@ Atualizar histórico do usuário
 - Manipulações com o banco podem ser feitas utilizando o dbeaver
 
 ## References:
+- https://fastapi.tiangolo.com/
 - https://github.com/kirillzhosul/api
