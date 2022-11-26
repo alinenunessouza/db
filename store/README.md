@@ -33,7 +33,7 @@ Atualizar histórico do usuário
 
 ## Database
 - postgreSQL versão 15.1
-- Para rodar um container com o postgres (sistema gerenciador de banco de dados objeto relacional), rodar o comando 'docker compose pull' no diretório src do projeto
+- Para rodar um container com o postgres (sistema gerenciador de banco de dados objeto relacional), rodar o comando 'docker compose up' no diretório src do projeto
 - Manipulações com o banco podem ser feitas utilizando o dbeaver
 
 ## References:
