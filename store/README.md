@@ -1,3 +1,5 @@
+## Gerenciamento de cadastros de usuários e produtos para uma loja (aplicação a ser acoplada para um site de vendas)
+
 ## How to install:
   - *pipenv install* 
 
@@ -6,24 +8,32 @@
   - *uvicorn app.main:app --reload* 
 
 ## Endpoints
-
 - /docs
 - /users
 - /products
-- /orders
-- /cart
+- /orders (retirado)
+- /cart (retirado)
+
+## Interface
+- Acessar endpoint /docs ou Postman
+
+obs.: endpoints de carrinho e pedido foram mantidos no projeto mas retirados do mapeamento da aplicação pois o foco da aplicação mudou.
 
 ## Funcionalidades:
 
-- Classes:
-Produto -> adicionar(id, nome, ..)
-Pedido -> criar(List<Produto>), atualizar
-Usuario -> comprar, vender
+- Gerenciamento de cadastro
+- Gerenciamento de produto
 
 - View:
-Estoque
+Calculo de volume do produto
+
+- Trigger:
+Atualizar histórico do usuário
+
+## Database
+- postgreSQL versão 15.1
+- Para rodar um container com o postgres (sistema gerenciador de banco de dados objeto relacional), rodar o comando 'docker compose pull' no diretório src do projeto
+- Manipulações com o banco podem ser feitas utilizando o dbeaver
 
 ## References:
 - https://github.com/kirillzhosul/api
-
-
