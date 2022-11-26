@@ -10,7 +10,7 @@ def find_all(conn):
 
 def find_by_cpf(conn, cpf: str):
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM Usuario WHERE cpf = '{cpf}'")
+    cursor.execute("SELECT * FROM Usuario WHERE cpf = %s", (cpf,))
     result = cursor.fetchone()
     return User(result[0], result[1], result[2], result[3], result[4])
     
@@ -36,11 +36,11 @@ def update(conn,
     telefone: str = None
 ):
     cursor = conn.cursor()
-    cursor.execute(f"UPDATE Usuario SET nome = '{nome}', sobrenome = '{sobrenome}', email = '{email}', telefone = '{telefone}' WHERE cpf = '{cpf}'")
+    cursor.execute("UPDATE Usuario SET nome = %s, sobrenome = %s, email = %s, telefone = %s WHERE cpf = %s", (nome, sobrenome, email, telefone, cpf))
 
 def delete_by_cpf(
     conn,
     cpf: str = None,
 ):
     cursor = conn.cursor()
-    cursor.execute(f"DELETE FROM Usuario WHERE cpf = '{cpf}'")
+    cursor.execute("DELETE FROM Usuario WHERE cpf = %s", (cpf,))
